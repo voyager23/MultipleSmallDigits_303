@@ -1,6 +1,6 @@
 #Makefile for folder tests/*
 
-TARGET = test1
+TARGET = classBaseN
 
 CFLAGS = -g
 
