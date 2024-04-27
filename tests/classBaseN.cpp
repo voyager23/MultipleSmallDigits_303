@@ -25,7 +25,8 @@ class BaseNCounter
 		void inc_accum();
 		void inc_accum(unsigned m);
 		void set_accum(unsigned m);
-
+		T get_accum();
+		
 	private:
 	std::vector<T> accumulator;
 	typename std::vector<T>::iterator i;
@@ -105,32 +106,44 @@ void BaseNCounter<T>::inc_accum(){
 
 template<typename T>
 void BaseNCounter<T>::inc_accum(unsigned m){
+
 	while(m--) inc_accum();
 }
 
-// ---------------------------------------------------------------------
+template<typename T>
+T BaseNCounter<T>::get_accum(){
+	// return the digits of the accumulator as a type T number
+	T n = 0;
+	for(auto i = accumulator.rbegin(); i != accumulator.rend(); ++i){
+		n *= 10;
+		n += *i;
+	}
+	return n
+}
+
+// ============================================================================
 int main(int argc, char const *argv[])
 {
 	BaseNCounter<unsigned> bnc(3, 24);
 	int loop = 32;
 	while(loop--){
-		cout << bnc.str_accum() << endl;
+		cout << bnc.get_accum() << endl;
 		bnc.inc_accum();
 	}
 	cout << endl;
 	bnc.inc_accum(1024);
-	cout << bnc.str_accum() << endl;
+	cout << bnc.get_accum() << endl;
 	bnc.inc_accum();
-	cout << bnc.str_accum() << endl;
+	cout << bnc.get_accum() << endl;
 	bnc.set_accum(5);
-	cout << bnc.str_accum() << endl;
+	cout << bnc.get_accum() << endl;
 
 	// BaseNCounter<unsigned> bnd(3, "22");
-	// cout << bnd.str_accum() << endl;
+	// cout << bnd.get_accum() << endl;
 	// bnd.inc_accum();
-	// cout << bnd.str_accum() << endl;	
+	// cout << bnd.get_accum() << endl;	
 	// bnd.inc_accum();
-	// cout << bnd.str_accum() << endl;	
+	// cout << bnd.get_accum() << endl;	
 	return 0;
 }
 
