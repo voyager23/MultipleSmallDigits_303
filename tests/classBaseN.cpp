@@ -26,7 +26,7 @@ class BaseNCounter
 		void inc_accum(unsigned m);
 		void set_accum(unsigned m);
 		T get_accum();
-		
+
 	private:
 	std::vector<T> accumulator;
 	typename std::vector<T>::iterator i;
@@ -118,7 +118,7 @@ T BaseNCounter<T>::get_accum(){
 		n *= 10;
 		n += *i;
 	}
-	return n
+	return n;
 }
 
 // ============================================================================
