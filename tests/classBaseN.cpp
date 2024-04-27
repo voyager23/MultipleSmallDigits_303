@@ -121,6 +121,23 @@ T BaseNCounter<T>::get_accum(){
 	return n;
 }
 
+/*
+	BaseNCounter bnc(3,0)
+	for n : 100 {
+		bnc.set_accum(0)
+		while(true){ 
+			bnc.inc_accum(n)
+			T z = bnc.get_accum()
+			if ((T % n) == 0){
+				output solution
+				break
+			} if...
+		} while...
+		next n
+	} for...
+*/
+
+
 // ============================================================================
 int main(int argc, char const *argv[])
 {
