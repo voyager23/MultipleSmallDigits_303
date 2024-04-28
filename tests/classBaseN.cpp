@@ -5,6 +5,7 @@
  */
 
 #include "classBaseN.hpp"
+#include "classPrime.hpp"
 
 // ---------------------------------------------------------------------
 template<typename T>
@@ -113,6 +114,18 @@ T BaseNCounter<T>::get_accum(){
 // ============================================================================
 int main(int argc, char const *argv[])
 {
+
+	Primes<uint64_t> P;
+	cout << "<"<<P.get_hi_prime()<<">"<< endl;
+
+	// uint64_t query = 60*32*510;
+	// vector<uint64_t> factors = P.prime_factors(query);
+	// cout << query << " : ";
+	// for(auto f : factors) cout << " " << f;
+	// cout << endl;	
+	
+	//==============================================
+
 	BaseNCounter<unsigned> bnc(3, 24);
 	int loop = 32;
 	while(loop--){

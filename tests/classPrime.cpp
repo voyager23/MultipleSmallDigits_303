@@ -9,8 +9,6 @@
  * 
  */
 
-
-
 #include "classPrime.hpp"
 
 template<typename T>
@@ -54,17 +52,17 @@ vector<T> Primes<T>::prime_factors(T n){
 
 
 // Test code
-int main(int argc, char const *argv[])
-{
-	/* code */
-	Primes<uint64_t> P;
-	cout << "<"<<P.get_hi_prime()<<">"<< endl;
+// int main(int argc, char const *argv[])
+// {
+// 	/* code */
+// 	Primes<uint64_t> P;
+// 	cout << "<"<<P.get_hi_prime()<<">"<< endl;
 
-	uint64_t query = 60*32*510;
-	vector<uint64_t> factors = P.prime_factors(query);
-	cout << query << " : ";
-	for(auto f : factors) cout << " " << f;
-	cout << endl;	
+// 	uint64_t query = 60*32*510;
+// 	vector<uint64_t> factors = P.prime_factors(query);
+// 	cout << query << " : ";
+// 	for(auto f : factors) cout << " " << f;
+// 	cout << endl;	
 
-	return 0;
-}
+// 	return 0;
+// }

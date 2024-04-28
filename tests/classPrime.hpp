@@ -23,8 +23,8 @@ template<typename T>
 class Primes
 {
 public:
-	Primes() { sieve(1000);	} //default
-	Primes(T n) { sieve(n); }	//specify the upper prime limit
+	//Primes() { this->sieve(1000);	} //default
+	//Primes(T n) { this->sieve(n); }	//specify the upper prime limit
 	T get_hi_prime() { return primes.back(); }
 	vector<T> prime_factors(T n);
 
