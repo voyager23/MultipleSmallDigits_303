@@ -6,8 +6,11 @@ AUX=classPrime
 
 CFLAGS = -g
 
-$(TARGET): $(TARGET).cpp $(AUX).cpp
-	g++ $(CFLAGS) $(TARGET).cpp $(AUX).cpp -o ../bin/$(TARGET)
+$(TARGET): $(TARGET).cpp
+	g++ $(CFLAGS) $(TARGET).cpp -o ../bin/$(TARGET)
+
+classPrime.o : classPrime.cpp
+	g++ $(CFLAGS) -c classPrime.cpp
 	
 phony: run gdb
 

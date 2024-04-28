@@ -94,57 +94,29 @@ T BaseNCounter<T>::get_accum(){
 	return n;
 }
 
-/*
-	BaseNCounter bnc(3,0)
-	for n : 100 {
-		bnc.set_accum(0)
-		while(true){ 
-			bnc.inc_accum(n)
-			T z = bnc.get_accum()
-			if ((T % n) == 0){
-				output solution
-				break
-			} if...
-		} while...
-		next n
-	} for...
-*/
-
-
 // ============================================================================
 int main(int argc, char const *argv[])
 {
 
-	Primes<uint64_t> P;
+	// Setup Primes
+	Primes<unsigned> P(10000);
 	cout << "<"<<P.get_hi_prime()<<">"<< endl;
 
-	// uint64_t query = 60*32*510;
-	// vector<uint64_t> factors = P.prime_factors(query);
-	// cout << query << " : ";
-	// for(auto f : factors) cout << " " << f;
-	// cout << endl;	
-	
-	//==============================================
+	BaseNCounter<unsigned> bnc(3,1);
+	unsigned n = 2;
+	while(n++ <= 100){
+		bnc.set_accum(1);
+		while(true){ 
+			bnc.inc_accum();
+			unsigned z = bnc.get_accum();
+			if ((z % n) == 0){
+				//output solution -> n, primefactors(n), f(n), primefactors(f(n))
+				cout << n << " " << z << endl;
+				break;
+			} //if...
+		} //while...
+	} //for...
 
-	BaseNCounter<unsigned> bnc(3, 24);
-	int loop = 32;
-	while(loop--){
-		cout << bnc.get_accum() << endl;
-		bnc.inc_accum();
-	}
-	cout << endl;
-	bnc.inc_accum(1024);
-	cout << bnc.get_accum() << endl;
-	bnc.inc_accum();
-	cout << bnc.get_accum() << endl;
-	bnc.set_accum(5);
-	cout << bnc.get_accum() << endl;
 
-	// BaseNCounter<unsigned> bnd(3, "22");
-	// cout << bnd.get_accum() << endl;
-	// bnd.inc_accum();
-	// cout << bnd.get_accum() << endl;	
-	// bnd.inc_accum();
-	// cout << bnd.get_accum() << endl;	
 	return 0;
 }
