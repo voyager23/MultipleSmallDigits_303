@@ -104,14 +104,18 @@ int main(int argc, char const *argv[])
 
 	BaseNCounter<unsigned> bnc(3,1);
 	unsigned n = 2;
-	while(n++ <= 100){
+	while(n++ < 100){
 		bnc.set_accum(1);
 		while(true){ 
 			bnc.inc_accum();
 			unsigned z = bnc.get_accum();
 			if ((z % n) == 0){
 				//output solution -> n, primefactors(n), f(n), primefactors(f(n))
-				cout << n << " " << z << endl;
+				cout << n << "\t";
+				for(auto pf : P.prime_factors(n)) cout << " " << pf;
+				cout << "\t" << z << "\t";
+				for(auto pf : P.prime_factors(z)) cout << " " << pf;
+				cout << endl;
 				break;
 			} //if...
 		} //while...
