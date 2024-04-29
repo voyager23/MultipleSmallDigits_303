@@ -16,7 +16,7 @@ BaseNCounter<T>::BaseNCounter (T b)
 // !No_San_Chx!
 {
 	base = b;
-	accumulator.clear();	
+	accumulator = {0,0};
 }
 
 template<typename T>
@@ -25,7 +25,7 @@ BaseNCounter<T>::BaseNCounter (T b, T v)
 // Assume base b and intial base10 value v as parameters
 {
 	base =  b;
-	accumulator.clear();
+	accumulator = {0,0};
 	while(v > 0){
 		accumulator.push_back(v % b);
 		v /= b;
@@ -101,13 +101,11 @@ T BaseNCounter<T>::get_accum(){
 int main(int argc, char const *argv[])
 {
 
-
 	Primes< long unsigned> P;
-
-	std::cout << P.get_hi_prime() << std::endl;
+	// std::cout << P.get_hi_prime() << std::endl;
 
 	BaseNCounter<unsigned> bnc(3,1);
-	unsigned n = 2;
+	unsigned n = 1;
 	while(n++ < 100){
 		bnc.set_accum(1);
 		while(true){ 
