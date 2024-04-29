@@ -1,5 +1,5 @@
 /*
- * classBaseN.cpp
+ * classBaseN.hpp
  * 
  * 
  */
@@ -18,20 +18,20 @@ template<typename T>
 class BaseNCounter
 {	
 	public:
-		BaseNCounter(unsigned base); // Warning: No Sanity Checks
-		BaseNCounter(unsigned base, unsigned v); // initial value base10 - converted internally 
-		BaseNCounter(unsigned base, string v); // Inital value as a string
+		BaseNCounter(T base); // Warning: No Sanity Checks
+		BaseNCounter(T base, T v); // initial value base10 - converted internally 
+		BaseNCounter(T base, string v); // Inital value as a string
 		string str_accum();
 		void inc_accum();
-		void inc_accum(unsigned m);
-		void set_accum(unsigned m);
+		void inc_accum(T m);
+		void set_accum(T m);
 		T get_accum();
 
 	private:
 	std::vector<T> accumulator;
 	typename std::vector<T>::iterator i;
-	unsigned base;
-	unsigned sum,carry;
+	T base;
+	T sum,carry;
 };
 
 #endif

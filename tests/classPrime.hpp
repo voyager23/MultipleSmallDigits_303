@@ -7,26 +7,31 @@
  * Provides a class which offers functions to construct a Sieve of Primes 
  * and to find the prime factors of a given number.
  * Uses uint64_t as the base type
+
+ 	Template classes need to have the definitions in the header to
+ 	avoid linker errors
+
  * 
  * It seems neccessary to include the class definitions in the same
  */
 
 #ifndef __classPrime__
 #define __classPrime__
+
 #include <iostream>
 #include <cstdint>
 #include <vector>
 
 using namespace std;
-typedef uint64_t T;
 
 template<typename T>
 class Primes
 {
 public:
-	Primes() { sieve(1000);	} //default
-	Primes(T n) { sieve(n); }	//specify the upper prime limit
-	T get_hi_prime() { return primes.back(); }
+
+	Primes();
+	Primes(T n);//specify the upper prime limit
+	T get_hi_prime();
 	vector<T> prime_factors(T n);
 
 private:
@@ -34,10 +39,27 @@ private:
 	vector<T> factors;
 	void sieve(T limit);
 };
+
+// -----Definitions-----
+template<typename T>
+Primes<T>::Primes(){
+	sieve(1000);
+}
+
+template<typename T>
+Primes<T>::Primes(T n){
+	sieve(n);
+}
+
+template<typename T>
+T Primes<T>::get_hi_prime(void){
+	return primes.back();
+}
+
 template<typename T>
 void Primes<T>::sieve(T n)
 {
-	printf("Starting Sieve for n = %llu...",n);
+	printf("Starting Sieve for n = %lu...",n);
     // internal vector of bool
     std::vector<bool> prime;
     // Set n+1 entries in vector<bool> to true

@@ -9,7 +9,20 @@
  * 
  */
 
-#include "classPrime.hpp"
+template<typename T>
+Primes<T>::Primes(){
+	sieve(1000);
+}
+
+template<typename T>
+Primes<T>::Primes(T n){
+	sieve(n);
+}
+
+template<typename T>
+T Primes<T>::get_hi_prime(void){
+	return primes.back();
+}
 
 template<typename T>
 void Primes<T>::sieve(T n)
@@ -49,20 +62,3 @@ vector<T> Primes<T>::prime_factors(T n){
 	}
 	return factors;
 }
-
-
-// Test code
-// int main(int argc, char const *argv[])
-// {
-// 	/* code */
-// 	Primes<uint64_t> P;
-// 	cout << "<"<<P.get_hi_prime()<<">"<< endl;
-
-// 	uint64_t query = 60*32*510;
-// 	vector<uint64_t> factors = P.prime_factors(query);
-// 	cout << query << " : ";
-// 	for(auto f : factors) cout << " " << f;
-// 	cout << endl;	
-
-// 	return 0;
-// }

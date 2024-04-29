@@ -4,12 +4,15 @@
  * 
  */
 
-#include "classBaseN.hpp"
+#include <cstdint>
+
 #include "classPrime.hpp"
+#include "classBaseN.hpp"
+
 
 // ---------------------------------------------------------------------
 template<typename T>
-BaseNCounter<T>::BaseNCounter (unsigned b)
+BaseNCounter<T>::BaseNCounter (T b)
 // !No_San_Chx!
 {
 	base = b;
@@ -17,7 +20,7 @@ BaseNCounter<T>::BaseNCounter (unsigned b)
 }
 
 template<typename T>
-BaseNCounter<T>::BaseNCounter (unsigned b, unsigned v)
+BaseNCounter<T>::BaseNCounter (T b, T v)
 // !No_San_Chx!
 // Assume base b and intial base10 value v as parameters
 {
@@ -30,7 +33,7 @@ BaseNCounter<T>::BaseNCounter (unsigned b, unsigned v)
 }
 
 template<typename T>
-void BaseNCounter<T>::set_accum(unsigned v)
+void BaseNCounter<T>::set_accum(T v)
 // !No_San_Chx!
 {
 	// No change to base
@@ -42,7 +45,7 @@ void BaseNCounter<T>::set_accum(unsigned v)
 }
 
 template<typename T>
-BaseNCounter<T>::BaseNCounter (unsigned b, string v)
+BaseNCounter<T>::BaseNCounter (T b, string v)
 // !No_San_Chx!
 // Save the input string in the accumulator
 {
@@ -78,7 +81,7 @@ void BaseNCounter<T>::inc_accum(){
 }
 
 template<typename T>
-void BaseNCounter<T>::inc_accum(unsigned m){
+void BaseNCounter<T>::inc_accum(T m){
 
 	while(m--) inc_accum();
 }
@@ -98,9 +101,10 @@ T BaseNCounter<T>::get_accum(){
 int main(int argc, char const *argv[])
 {
 
-	// Setup Primes
-	Primes<unsigned> P(10000);
-	cout << "<"<<P.get_hi_prime()<<">"<< endl;
+
+	Primes< long unsigned> P;
+
+	std::cout << P.get_hi_prime() << std::endl;
 
 	BaseNCounter<unsigned> bnc(3,1);
 	unsigned n = 2;
@@ -120,7 +124,5 @@ int main(int argc, char const *argv[])
 			} //if...
 		} //while...
 	} //for...
-
-
 	return 0;
 }
