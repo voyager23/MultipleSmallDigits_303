@@ -2,12 +2,10 @@
 
 TARGET = classBaseN
 
-AUX=classPrime
-
 CFLAGS = -g
 
-$(TARGET): $(TARGET).cpp $(AUX).cpp
-	g++ $(CFLAGS) $(TARGET).cpp $(AUX).cpp -o ../bin/$(TARGET)
+$(TARGET): $(TARGET).cpp classPrime.hpp
+	g++ $(CFLAGS) $(TARGET).cpp  -o ../bin/$(TARGET)
 	
 phony: run gdb
 
