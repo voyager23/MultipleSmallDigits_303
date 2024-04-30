@@ -8,7 +8,9 @@
 #include <cstdint>
 #include <cmath>
 
+#include "classPrime.hpp"
 #include "classBaseN.hpp"
+
 using namespace std;
 typedef uint64_t T;
 
@@ -38,6 +40,7 @@ vector<T> S(T n){
 int main(int argc, char **argv)
 {
 	BaseNCounter<T> bnc(3);
+	Primes<T> primes(1000000);
 	vector<T> pd;
 	int c = 100;
 	while(c--){
