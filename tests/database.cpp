@@ -9,6 +9,8 @@
 #include <cmath>
 
 #include "classBaseN.hpp"
+#include "classPrime.hpp"
+
 using namespace std;
 typedef uint64_t T;
 
