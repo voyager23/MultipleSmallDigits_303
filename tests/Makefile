@@ -1,10 +1,10 @@
 #Makefile for folder tests/*
 
-TARGET = classBaseN
+TARGET = database
 
 CFLAGS = -g
 
-$(TARGET): $(TARGET).cpp classPrime.hpp
+$(TARGET): $(TARGET).cpp 
 	g++ $(CFLAGS) $(TARGET).cpp  -o ../bin/$(TARGET)
 	
 phony: run gdb

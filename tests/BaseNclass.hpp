@@ -1,6 +1,5 @@
 /*
  * classBaseN.hpp
- * Templated class file - contains declarations and definitions
  * 
  * 
  */
