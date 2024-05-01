@@ -12,8 +12,11 @@
 #include <vector>
 #include <string>
 #include <algorithm>
+#include <cstdint>
 
 using namespace std;
+
+typedef uint64_t T;
 
 template<typename T>
 class BaseNCounter

@@ -4,8 +4,8 @@ TARGET = classOutlier
 
 CFLAGS = -g -std=c++17
 
-$(TARGET): $(TARGET).hpp 
-	g++ $(CFLAGS) $(TARGET).hpp  -o ../bin/$(TARGET)
+$(TARGET): $(TARGET).cpp 
+	g++ $(CFLAGS) $(TARGET).cpp  -o ../bin/$(TARGET)
 	
 phony: run gdb
 
