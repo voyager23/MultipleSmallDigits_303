@@ -4,7 +4,7 @@
  */
 
 #include <iostream>
-#include <unordered_map>
+#include <map>
 #include <cstdint>
 #include <cmath>
 
@@ -39,24 +39,35 @@ vector<T> S(T n){
 
 int main(int argc, char **argv)
 {
+	/* 
+	 * setup map<{n = proper divisor}, associated base3 number
+	 * As each base3 number is analysed, scan the map with each proper divisor.
+	 * if not found add entry map( proper_divisor, base3 );
+	 */
+	 bool q = true;	// q = quiet
+	std::map<T,T> db;	// < {n or divisor}, base3		 
+	vector<T> pdivs;
+	
+	const T limit = 1500;
+	
 	BaseNCounter<T> bnc(3);	// set base 3
 	T m = 1;
 	do {
 		bnc.inc_accum();
-		cout << m << " " << bnc.get_accum() << endl;
+		// add the proper divisors of the base3 number
+		pdivs = S(bnc.get_accum());
+		if(!q) cout << m << " " << bnc.get_accum() << "  ";
+		for(T pd : pdivs) {
+			if(!q) cout << " " << pd;
+			// key value is divisor
+			auto r = db.try_emplace(pd, bnc.get_accum());
+		}		
+		if(!q) cout << endl;
 		m++;
-	} while(m < 100);
-	exit(0);
-
-
-	T Sum = 0;
-	T n = 1;
-	while(n++ <= 100){
-		T b3 = bnc.get_accum();
-		T g = b3/n;
-		Sum += g;
-		bnc.inc_accum();
-	}
-	cout << "n:" << n << " Sum:" << Sum << endl;
+	} while(m <= limit);
+	// Finally scan the map for 1 <= key <= 100
+	for(T n = 1; n <= 300; ++n)
+		if(db.find(n) == db.end()) cout << "key:" << n << " not found." << endl;
+	cout << endl;
 	return 0;
 }

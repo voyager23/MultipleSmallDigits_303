@@ -2,7 +2,7 @@
 
 TARGET = database
 
-CFLAGS = -g
+CFLAGS = -g -std=c++17
 
 $(TARGET): $(TARGET).cpp 
 	g++ $(CFLAGS) $(TARGET).cpp  -o ../bin/$(TARGET)
