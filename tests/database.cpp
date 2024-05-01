@@ -39,15 +39,24 @@ vector<T> S(T n){
 
 int main(int argc, char **argv)
 {
-	BaseNCounter<T> bnc(3);
-	vector<T> pd;
-	int c = 100;
-	while(c--){
-		cout << bnc.get_accum() << "\t";
-		pd = S(bnc.get_accum());
-		for(T d : pd) cout << " " << d;
-		cout << endl;
+	BaseNCounter<T> bnc(3);	// set base 3
+	T m = 1;
+	do {
 		bnc.inc_accum();
-	}	
+		cout << m << " " << bnc.get_accum() << endl;
+		m++;
+	} while(m < 100);
+	exit(0);
+
+
+	T Sum = 0;
+	T n = 1;
+	while(n++ <= 100){
+		T b3 = bnc.get_accum();
+		T g = b3/n;
+		Sum += g;
+		bnc.inc_accum();
+	}
+	cout << "n:" << n << " Sum:" << Sum << endl;
 	return 0;
 }
