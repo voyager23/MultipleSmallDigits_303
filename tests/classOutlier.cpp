@@ -15,16 +15,18 @@
 #ifndef __Class_Outlier__
 #define __Class_Outlier__
 
-using namespace std;
-
 #include <iostream>
 #include <cstdint>
 #include <map>
 #include <vector>
+#include <algorithm>
+
+using namespace std;
 
 typedef uint64_t T;
 
 #include "classBaseN.hpp"
+#include "classPrime.hpp"
 
 //--------------------Class Declaration---------------------------------
 template<typename T>
@@ -68,15 +70,29 @@ T Outlier<T>::funct(T n)
 
 #endif
 
+struct
+    {
+        //bool operator()(vector<T> a, vector<T> b) const { return a.size() < b.size(); }
+        bool operator()(vector<T> a, vector<T> b) const 
+        { 
+        	if(a.size() < b.size()) return true; 
+        	if(a.size() > b.size()) return false;
+        	return a < b;
+        }
+    }
+    customLess;
+
 //--------------------Main----------------------------------------------
 
 int main(int argc,char ** argv)
 {
+	Primes<T> primes(10000);
 	Outlier<T> ds(18);
 	// Must specify typename T, defaults to int which causes overflow
 	BaseNCounter<T> bnc(3);
 	bnc.inc_accum();
 	vector<T> b3n1e13;
+	vector<vector<T>> factors;
 	T n, count=0;;
 	n = bnc.get_accum();
 	while(true){
@@ -88,12 +104,20 @@ int main(int argc,char ** argv)
 
 		bnc.inc_accum();
 		n = bnc.get_accum();
-		if(n > 1000)break;
+		if(n > 2222)break;
 		count++;
 		b3n1e13.push_back(n);
-		cout << n << endl;
+		cout << n << " ";
+		factors.push_back(primes.prime_factors(n));
 	}
-	cout << "count: " << count << endl;
+	cout << endl;
+	sort(factors.begin(), factors.end(), customLess);
+	//reverse(factors.begin(), factors.end());
+	
+	for(auto p : factors){
+		for(auto q : p) cout << " " << q;
+		cout << endl;
+	}
 	cout << "size: " << b3n1e13.size() << endl;
 }
 
