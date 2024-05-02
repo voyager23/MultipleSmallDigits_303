@@ -116,7 +116,7 @@ void BaseNCounter<T>::inc_accum(T m){
 }
 
 template<typename T>
-T BaseNCounter<T>::get_accum(){
+uint64_t BaseNCounter<T>::get_accum(){
 	// return the digits of the accumulator as a type T number
 	T n = 0;
 	for(auto i = accumulator.rbegin(); i != accumulator.rend(); ++i){

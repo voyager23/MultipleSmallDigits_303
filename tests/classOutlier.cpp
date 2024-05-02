@@ -73,14 +73,15 @@ T Outlier<T>::funct(T n)
 int main(int argc,char ** argv)
 {
 	Outlier<T> ds(18);
-	BaseNCounter bnc(3);
+	BaseNCounter bnc(3, "2222222222");
 	T n;
+
 	n = bnc.get_accum();
-	while(n != 1000000000){
+	while(true){
 		cout << n << endl;
 		bnc.inc_accum();
 		n = bnc.get_accum();
-		break;
+		;;
 	}
 }
 
