@@ -48,7 +48,7 @@ int main(int argc, char **argv)
 	std::map<T,T> db;	// < {n or divisor}, base3		 
 	vector<T> pdivs;
 	
-	const T limit = 1500;
+	const T limit = 30000;
 	
 	BaseNCounter<T> bnc(3);	// set base 3
 	T m = 1;
@@ -65,8 +65,8 @@ int main(int argc, char **argv)
 		if(!q) cout << endl;
 		m++;
 	} while(m <= limit);
-	// Finally scan the map for 1 <= key <= 100
-	for(T n = 1; n <= 300; ++n)
+	// Finally scan the map for 1 <= key <= ???
+	for(T n = 1; n <= 3000; ++n)
 		if(db.find(n) == db.end()) cout << "key:" << n << " not found." << endl;
 	cout << endl;
 	return 0;

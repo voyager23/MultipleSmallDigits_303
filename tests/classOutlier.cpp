@@ -73,16 +73,26 @@ T Outlier<T>::funct(T n)
 int main(int argc,char ** argv)
 {
 	Outlier<T> ds(18);
-	BaseNCounter bnc(3, "2222222222");
-	T n;
-
+	// Must specify typename T, defaults to int which causes overflow
+	BaseNCounter<T> bnc(3);
+	bnc.inc_accum();
+	vector<T> b3n1e13;
+	T n, count=0;;
 	n = bnc.get_accum();
 	while(true){
-		cout << n << endl;
+		
+		if ((n % (1188)==0)) {
+			cout << n << endl;
+			break;
+		}
 		bnc.inc_accum();
 		n = bnc.get_accum();
-		;;
+		if(n > 10000000000000)break;
+		count++;
+		b3n1e13.push_back(n);
 	}
+	cout << "count: " << count << endl;
+	cout << "size: " << b3n1e13.size() << endl;
 }
 
 
