@@ -81,15 +81,17 @@ int main(int argc,char ** argv)
 	n = bnc.get_accum();
 	while(true){
 		
-		if ((n % (1188)==0)) {
-			cout << n << endl;
-			break;
-		}
+		// if ((n % (1188)==0)) {
+		// 	cout << n << endl;
+		// 	break;
+		// }
+
 		bnc.inc_accum();
 		n = bnc.get_accum();
-		if(n > 10000000000000)break;
+		if(n > 1000)break;
 		count++;
 		b3n1e13.push_back(n);
+		cout << n << endl;
 	}
 	cout << "count: " << count << endl;
 	cout << "size: " << b3n1e13.size() << endl;
