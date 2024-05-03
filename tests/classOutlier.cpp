@@ -20,6 +20,7 @@
 #include <map>
 #include <vector>
 #include <algorithm>
+#include <multiset>
 
 using namespace std;
 
@@ -91,17 +92,14 @@ int main(int argc,char ** argv)
 	// Must specify typename T, defaults to int which causes overflow
 	BaseNCounter<T> bnc(3);
 	bnc.inc_accum();
+
 	vector<T> b3n1e13;
 	vector<vector<T>> factors;
+	map<T, vector<T>> b3n_factors;
+
 	T n, count=0;;
 	n = bnc.get_accum();
 	while(true){
-		
-		// if ((n % (1188)==0)) {
-		// 	cout << n << endl;
-		// 	break;
-		// }
-
 		bnc.inc_accum();
 		n = bnc.get_accum();
 		if(n > 2222)break;
@@ -109,16 +107,24 @@ int main(int argc,char ** argv)
 		b3n1e13.push_back(n);
 		cout << n << " ";
 		factors.push_back(primes.prime_factors(n));
+		b3n_factors.emplace(n, primes.prime_factors(n));
 	}
 	cout << endl;
+
 	sort(factors.begin(), factors.end(), customLess);
+
 	//reverse(factors.begin(), factors.end());
 	
 	for(auto p : factors){
 		for(auto q : p) cout << " " << q;
 		cout << endl;
 	}
-	cout << "size: " << b3n1e13.size() << endl;
+	//cout << "size: " << b3n1e13.size() << endl;
+
+	// for(auto i = b3n_factors.begin(); i != b3n_factors.end(); ++i){		
+	// 	cout << i->first << "  ";
+	// 	for(auto j = i->second.begin(); j != i->second.end(); ++j) cout << " " << *j;
+	// 	cout << endl;
+	// }
+
 }
-
-

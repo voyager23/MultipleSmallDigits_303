@@ -44,11 +44,11 @@ int main(int argc, char **argv)
 	 * As each base3 number is analysed, scan the map with each proper divisor.
 	 * if not found add entry map( proper_divisor, base3 );
 	 */
-	 bool q = true;	// q = quiet
+	 bool verb = true;	// q = quiet
 	std::map<T,T> db;	// < {n or divisor}, base3		 
 	vector<T> pdivs;
 	
-	const T limit = 30000;
+	const T limit = 1000;
 	
 	BaseNCounter<T> bnc(3);	// set base 3
 	T m = 1;
@@ -56,17 +56,17 @@ int main(int argc, char **argv)
 		bnc.inc_accum();
 		// add the proper divisors of the base3 number
 		pdivs = S(bnc.get_accum());
-		if(!q) cout << m << " " << bnc.get_accum() << "  ";
+		if(verb) cout << m << " " << bnc.get_accum() << "  ";
 		for(T pd : pdivs) {
-			if(!q) cout << " " << pd;
+			if(verb) cout << " " << pd;
 			// key value is divisor
 			auto r = db.try_emplace(pd, bnc.get_accum());
 		}		
-		if(!q) cout << endl;
+		if(verb) cout << endl;
 		m++;
 	} while(m <= limit);
 	// Finally scan the map for 1 <= key <= ???
-	for(T n = 1; n <= 3000; ++n)
+	for(T n = 1; n <= 300; ++n)
 		if(db.find(n) == db.end()) cout << "key:" << n << " not found." << endl;
 	cout << endl;
 	return 0;
