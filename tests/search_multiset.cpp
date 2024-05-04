@@ -104,7 +104,7 @@ int main(int argc,char ** argv)
 
 		for(auto e : b3n_set_factors)
 	 	{
-	 		if(e.first < n) continue;
+	 		if(e.first <= n) continue;
 	 		multiset<T> target = e.second;
 			if (includes(target.begin(), target.end(), query.begin(), query.end())) {
 				cout << n << "\t" << e.first << " ";
