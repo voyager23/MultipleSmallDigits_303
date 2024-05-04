@@ -20,7 +20,7 @@
 #include <map>
 #include <vector>
 #include <algorithm>
-#include <multiset>
+#include <set>
 
 using namespace std;
 
@@ -96,6 +96,7 @@ int main(int argc,char ** argv)
 	vector<T> b3n1e13;
 	vector<vector<T>> factors;
 	map<T, vector<T>> b3n_factors;
+	map<T,multiset<T>> b3n_set_factors;
 
 	T n, count=0;;
 	n = bnc.get_accum();
@@ -115,16 +116,20 @@ int main(int argc,char ** argv)
 
 	//reverse(factors.begin(), factors.end());
 	
-	for(auto p : factors){
-		for(auto q : p) cout << " " << q;
-		cout << endl;
-	}
-	//cout << "size: " << b3n1e13.size() << endl;
-
-	// for(auto i = b3n_factors.begin(); i != b3n_factors.end(); ++i){		
-	// 	cout << i->first << "  ";
-	// 	for(auto j = i->second.begin(); j != i->second.end(); ++j) cout << " " << *j;
+	// for(auto p : factors){
+	// 	for(auto q : p) cout << " " << q;
 	// 	cout << endl;
 	// }
+	//cout << "size: " << b3n1e13.size() << endl;
+
+	for(auto i = b3n_factors.begin(); i != b3n_factors.end(); ++i){		
+		// construct a multiset
+		multiset<T> temp;
+		for(auto j = i->second.begin(); j != i->second.end(); ++j) temp.insert(*j);
+		b3n_set_factors.emplace(i->first, temp);
+		cout << endl;
+	}
+
+	return 0;
 
 }
