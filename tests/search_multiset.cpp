@@ -56,7 +56,7 @@ struct
 
 int main(int argc,char ** argv)
 {
-	Primes<T> primes(10000);
+	Primes<T> primes(10000000);
 	// Must specify typename T, defaults to int which causes overflow
 	BaseNCounter<T> bnc(3);
 	bnc.inc_accum();
@@ -65,31 +65,23 @@ int main(int argc,char ** argv)
 	vector<vector<T>> factors;
 	map<T, vector<T>> b3n_factors;
 	map<T,multiset<T>> b3n_set_factors;
-
+	cout << "Generating the prime factors of base3 numbers"; NL;
 	T n, count=0;;
 	n = bnc.get_accum();
 	while(true){
 		bnc.inc_accum();
 		n = bnc.get_accum();
-		if(n > 2222)break;
+		if(n > 22222222)break;
 		count++;
 		b3n1e13.push_back(n);
-		cout << n << " ";
+		//cout << n << " ";
 		factors.push_back(primes.prime_factors(n));
 		b3n_factors.emplace(n, primes.prime_factors(n));
 	}
 	cout << endl;
 
 	sort(factors.begin(), factors.end(), customLess);
-
-	//reverse(factors.begin(), factors.end());
-	
-	// for(auto p : factors){
-	// 	for(auto q : p) cout << " " << q;
-	// 	cout << endl;
-	// }
-	//cout << "size: " << b3n1e13.size() << endl;
-
+	cout << "Constructing the multiset"; NL;
 	for(auto i = b3n_factors.begin(); i != b3n_factors.end(); ++i){		
 		// construct a multiset
 		multiset<T> temp;
@@ -104,18 +96,25 @@ int main(int argc,char ** argv)
 	NL;
 	cout << "----------Search function----------";
 	NL;
-	set<T> query = {2,3,3,11};
+	T Sum = 0;
+	for(T n = 3; n < 101 ; ++n )
+	{
+		vector<T>factors = primes.prime_factors(n);
+		set<T> query(factors.begin(), factors.end());
 
-	for(auto e : b3n_set_factors)
- 	{
- 		multiset<T> target = e.second;
-		if (includes(target.begin(), target.end(), query.begin(), query.end())){
-			cout << e.first << " ";
-			for(auto f : e.second) cout << f << " ";
-			NL;
+		for(auto e : b3n_set_factors)
+	 	{
+	 		if(e.first < n) continue;
+	 		multiset<T> target = e.second;
+			if (includes(target.begin(), target.end(), query.begin(), query.end())) {
+				cout << n << "\t" << e.first << " ";
+				for(auto f : e.second) cout << f << " ";
+				NL;
+				Sum += e.first / n;
+				break;
+			}
 		}
 	}
-
+	cout << endl << "Sum:" << Sum << endl;
 	return 0;
-
 }
