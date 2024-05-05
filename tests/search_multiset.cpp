@@ -108,8 +108,7 @@ int main(int argc,char ** argv)
 	while(true){
 		bnc.inc_accum();
 		n = bnc.get_accum();
-		//if(n > 22222222)break;
-		if(n > 2222)break;	//DEBUG
+		if(n > 2222222222)break;
 		count++;
 		b3n1e13.push_back(n);
 		//cout << n << " ";
@@ -134,19 +133,18 @@ int main(int argc,char ** argv)
 	NL;
 	cout << "----------Search function----------";
 	NL;
-	T Sum = 0;
-	for(T n = 42; n < 43 ; ++n )
+	T Sum = 1;
+	for(T n = 2; n < 101 ; ++n )
 	{
 		vector<T>factors = primes.prime_factors(n);
 		multiset<T> query(factors.begin(), factors.end());
 
 		for(auto e : b3n_set_factors)
 	 	{
-	 		if(e.first <= n) continue;
+	 		if(e.first < n) continue;
 	 		multiset<T> target = e.second;
-	 		target = {2,3,5,7};	//DEBUG ONLY
-			if (query_in_target(target,query)) {
-				cout << n << "\t" << e.first << " ";
+			if (query_in_target(target,query)==true) {
+				cout << n << "\t" << e.first << " / ";
 				for(auto f : e.second) cout << f << " ";
 				NL;
 				Sum += e.first / n;
