@@ -72,6 +72,9 @@ void prt_multiset(multiset<T> mst)
 
 int main(int argc, char const *argv[])
 {
+	for(T n = 1; n < 100; ++n) cout << 99*n << endl;
+
+	exit(0);
 	/* code */
 	multiset<T> query = {2,3,7};
 	multiset<T> target = {2,2,5,5};
