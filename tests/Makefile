@@ -1,8 +1,9 @@
 #Makefile for folder tests/*
 
 TARGET = search_multiset
+#TARGET = classOutlier
 
-CFLAGS = -g -std=c++20
+CFLAGS = -g -std=c++17
 
 $(TARGET): $(TARGET).cpp 
 	g++ $(CFLAGS) $(TARGET).cpp  -o ../bin/$(TARGET)

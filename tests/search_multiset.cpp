@@ -51,6 +51,43 @@ struct
  		NL;
  	}
  }
+ 
+ bool query_in_target(multiset<T>target, multiset<T>query);
+ bool query_in_target(multiset<T>target, multiset<T>query)
+ /*
+  * q==qend	t==tend return
+  *		0		0	continue
+  * 	0		1	false
+  * 	1		0	false
+  * 	1		1	true
+  */
+ {
+	multiset<T>::iterator tend, qend, t, q;
+	if (target.size() < query.size()) return false;
+	tend = target.end();
+	qend = query.end();
+	t = target.begin();
+	q = query.begin();
+	
+	while(true){
+		if(*q == *t) {
+			if(++q == qend) return true;
+			if(++t == tend) return false;
+		} else if(*t < *q) {
+			if(++t == tend) return false;
+		} else // (*q < *t)
+			return false;
+	}
+	
+	//~ while(true){
+		//~ if (*q != *t) return false;
+		//~ q++;
+		//~ if(q == qend) return true;	// all query elements matched
+		//~ do{++t;}while((*t < *q)and(t != tend));	// 
+		//~ if ((q != qend)and(t == tend)) return false;
+		//~ if(q == qend) return (t == tend);
+	//~ }
+}
 
 //--------------------Main----------------------------------------------
 
@@ -71,7 +108,8 @@ int main(int argc,char ** argv)
 	while(true){
 		bnc.inc_accum();
 		n = bnc.get_accum();
-		if(n > 22222222)break;
+		//if(n > 22222222)break;
+		if(n > 2222)break;	//DEBUG
 		count++;
 		b3n1e13.push_back(n);
 		//cout << n << " ";
@@ -97,16 +135,17 @@ int main(int argc,char ** argv)
 	cout << "----------Search function----------";
 	NL;
 	T Sum = 0;
-	for(T n = 3; n < 101 ; ++n )
+	for(T n = 42; n < 43 ; ++n )
 	{
 		vector<T>factors = primes.prime_factors(n);
-		set<T> query(factors.begin(), factors.end());
+		multiset<T> query(factors.begin(), factors.end());
 
 		for(auto e : b3n_set_factors)
 	 	{
 	 		if(e.first <= n) continue;
 	 		multiset<T> target = e.second;
-			if (includes(target.begin(), target.end(), query.begin(), query.end())) {
+	 		target = {2,3,5,7};	//DEBUG ONLY
+			if (query_in_target(target,query)) {
 				cout << n << "\t" << e.first << " ";
 				for(auto f : e.second) cout << f << " ";
 				NL;

@@ -116,18 +116,18 @@ int main(int argc,char ** argv)
 
 	//reverse(factors.begin(), factors.end());
 	
-	// for(auto p : factors){
-	// 	for(auto q : p) cout << " " << q;
-	// 	cout << endl;
-	// }
-	//cout << "size: " << b3n1e13.size() << endl;
+	for(auto p : factors){
+	 	for(auto q : p) cout << " " << q;
+	 	cout << endl;
+	}
+	cout << "size: " << b3n1e13.size() << endl;
 
 	for(auto i = b3n_factors.begin(); i != b3n_factors.end(); ++i){		
 		// construct a multiset
 		multiset<T> temp;
 		for(auto j = i->second.begin(); j != i->second.end(); ++j) temp.insert(*j);
 		b3n_set_factors.emplace(i->first, temp);
-		cout << endl;
+		//cout << endl;
 	}
 
 	return 0;
