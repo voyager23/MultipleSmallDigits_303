@@ -1,7 +1,7 @@
 #Makefile for folder tests/*
 
-TARGET = search_multiset
-#TARGET = classOutlier
+#TARGET = search_multiset
+TARGET = classOutlier
 
 CFLAGS = -g -std=c++17
 

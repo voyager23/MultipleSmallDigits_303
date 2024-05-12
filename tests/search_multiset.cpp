@@ -94,7 +94,7 @@ struct
 int main(int argc,char ** argv)
 {
 	Primes<T> primes(10000000);
-	// Must specify typename T, defaults to int which causes overflow
+	// Must specify typename T, else defaults to int which causes overflow
 	BaseNCounter<T> bnc(3);
 	bnc.inc_accum();
 
@@ -108,7 +108,7 @@ int main(int argc,char ** argv)
 	while(true){
 		bnc.inc_accum();
 		n = bnc.get_accum();
-		if(n > 2222222222)break;
+		if(n > 222222)break;
 		count++;
 		b3n1e13.push_back(n);
 		//cout << n << " ";

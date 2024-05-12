@@ -85,12 +85,14 @@ struct
 
 //--------------------Main----------------------------------------------
 
+bool verbose = false;
+
 int main(int argc,char ** argv)
 {
 	Primes<T> primes(10000);
 	Outlier<T> ds(18);
 	// Must specify typename T, defaults to int which causes overflow
-	BaseNCounter<T> bnc(3);
+	BaseNCounter<T> bnc(3);	//base3 counter
 	bnc.inc_accum();
 
 	vector<T> b3n1e13;
@@ -103,10 +105,10 @@ int main(int argc,char ** argv)
 	while(true){
 		bnc.inc_accum();
 		n = bnc.get_accum();
-		if(n > 2222)break;
+		if(n > 22222)break;
 		count++;
 		b3n1e13.push_back(n);
-		cout << n << " ";
+		if(verbose) cout << n << " ";
 		factors.push_back(primes.prime_factors(n));
 		b3n_factors.emplace(n, primes.prime_factors(n));
 	}
@@ -115,13 +117,14 @@ int main(int argc,char ** argv)
 	sort(factors.begin(), factors.end(), customLess);
 
 	//reverse(factors.begin(), factors.end());
-	
-	for(auto p : factors){
-	 	for(auto q : p) cout << " " << q;
-	 	cout << endl;
+	if(verbose) {
+		for(auto p : factors){
+			for(auto q : p) cout << " " << q;
+			cout << endl;
+		}
+		cout << "size: " << b3n1e13.size() << endl;
 	}
-	cout << "size: " << b3n1e13.size() << endl;
-
+	
 	for(auto i = b3n_factors.begin(); i != b3n_factors.end(); ++i){		
 		// construct a multiset
 		multiset<T> temp;
