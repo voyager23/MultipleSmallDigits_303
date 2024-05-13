@@ -64,14 +64,20 @@ BaseNCounter<T>::BaseNCounter (T b, T v)
 
 template<typename T>
 void BaseNCounter<T>::set_accum(T v)
-// !No_San_Chx!
+// Basic sanity checks
 {
-	// No change to base
 	accumulator.clear();
 	while(v > 0){
-		accumulator.push_back(v % base);
-		v /= base;
-	}	
+        T d = v % 10;
+        if(base > d) {
+            accumulator.push_back(d);
+            v /= 10;
+        } else { // error clause
+            cout << d << " >= " << base;
+            exit(1);
+        }
+	}
+    ;;	
 }
 
 template<typename T>

@@ -28,8 +28,14 @@ int main(int argc,char ** argv)
 	bnc.set_accum(22222);
 	
 	queue<T> q1, q2;
-	for(T n : {89, 889, 988, 989, 992})
+	for(T n = 90; n != 110; ++n){
 		q1.push(n);
+        q1.push(n*2);
+        q1.push(n*3);
+        q1.push(n*5);
+        q1.push(n*7);
+        q1.push(n*11);
+    }
 		
 	while(!(q1.empty())) {
 		T b3n = bnc.get_accum();
