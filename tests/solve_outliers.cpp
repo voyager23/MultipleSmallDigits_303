@@ -28,7 +28,7 @@ int main(int argc,char ** argv)
 	bnc.set_accum(22222);
 	
 	queue<T> q1, q2;
-	for(T n : {85, 87, 89, 95, 99, 199})
+	for(T n : {89, 889, 988, 989, 992})
 		q1.push(n);
 		
 	while(!(q1.empty())) {
