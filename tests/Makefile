@@ -2,10 +2,10 @@
 
 #TARGET = search_multiset
 #TARGET = classOutlier
-TARGET = solve_outliers
-TARGET = solve_list_outliers
+#TARGET = solve_outliers
+TARGET = solve_set_outliers
 
-CFLAGS = -g -std=c++17
+CFLAGS = -g -std=c++23
 
 $(TARGET): $(TARGET).cpp 
 	g++ $(CFLAGS) $(TARGET).cpp  -o ../bin/$(TARGET)
