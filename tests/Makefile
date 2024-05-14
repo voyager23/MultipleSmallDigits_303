@@ -3,6 +3,7 @@
 #TARGET = search_multiset
 #TARGET = classOutlier
 TARGET = solve_outliers
+TARGET = solve_list_outliers
 
 CFLAGS = -g -std=c++17
 
