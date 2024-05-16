@@ -37,62 +37,64 @@ typedef uint64_t T;
 
 int main(int argc, char **argv)
 {
-	// TEST AREA
+
+	const T expected = 11'363'107;
 	const bool not_true = false;
-	vector<bool> foo(5, false);
-	foo[0] = true;
-	foo[1] = true;
-	foo[3] = true;
-	for(auto b : foo) cout << "  " << b;
-	cout << endl;
-	cout << any_of(foo.begin(), foo.end(), [not_true](bool y) { return y == not_true; }) << endl;
-	
-	// TEST EXIT
-	exit(0);
-	// END TEST AREA
-	
-	
-	
-	const T foobar = 11'363'107;
 	// Consider a range of values 1 <= n <= MaxN
 	const T MaxN = 100;
-	
-	// Must specify typename T here 
-	// or else it defaults to int which overflows.
 	BaseNCounter<T> bnc(3);	//base3 counter
-	bnc.set_accum(2);
+	bnc.set_accum(0);
 	vector<bool> found(MaxN+1,false);
+	found[0] = true;
 	found[1] = true;
-	T Sum = 1;
-	T idx = 1;
-	while(idx < MaxN){
-		idx += 1;
-		if((idx) > bnc.get_accum()){
-			while(bnc.get_accum() < idx) bnc.inc_accum();
-			idx = 1;
-			while(found[idx] == true) ++idx;
-		}
-		if(((found[idx]==false)and((bnc.get_accum() % idx) == 0))){
-			found[idx] = true;
-			Sum += bnc.get_accum() / idx;
-			// Check for simple multiples
-			T mult = 2;
-			T tmp = idx*mult;
-			while((mult < 8)and(tmp <= MaxN)and(tmp <= bnc.get_accum())){
-				if(((found[tmp] == false)and(bnc.get_accum() % tmp) == 0)){
-					found[tmp] = true;
-					Sum += bnc.get_accum() / tmp;
-				}//if...
-				++mult;
-				tmp = idx * mult;
-			}//while...			
-		} else {
+	T idx, Sum = 1;
+	while(any_of(found.begin(), found.end(), [not_true](bool y) { return y == not_true; })){
+		idx = 1;
+		// Adjust the index
+		while(found[idx] == true) ++idx;
+		bnc.inc_accum();
+		// Adjust the accumulator to match
+		//bnc.set_accum(1);
+		//while(bnc.get_accum() < idx) bnc.inc_accum();		
+		while(idx <= MaxN){
+			if ((found[idx] == false) and ( bnc.get_accum() % idx == 0 )){
+				found[idx] = true;
+				Sum += bnc.get_accum() / idx;
+				cout << idx << "/" << bnc.get_accum() << endl;
+				// check for any simple multiples
+				//~ T mult = 2;
+				//~ T temp;
+				//~ do {
+					//~ temp = idx * mult;
+					//~ if (temp > MaxN) break;
+					//~ if ((found[temp] == false) and ( bnc.get_accum() % temp == 0 )){
+						//~ found[temp] = true;
+						//~ Sum += bnc.get_accum() / temp;
+					//~ }
+				//~ } while(++mult < 8);
+			}
 			++idx;
+			while(bnc.get_accum() < idx) bnc.inc_accum();
 		}
-	}//while idx...
-	//cout << "Expect: " << foobar << endl;
+		//cout << "Part Sum:" << Sum << endl;
+	} // main while loop
+	
+	cout << "Expect: " << expected << endl;
 	cout << "Sum:" << Sum << endl;
 	
 	return 0;
 }
 
+	//~ // TEST AREA
+	//~ const bool not_true = false;
+	//~ vector<bool> foo(5, false);
+	//~ foo[0] = true;
+	//~ foo[1] = true;
+	//~ foo[3] = true;
+	//~ for(auto b : foo) cout << "  " << b;
+	//~ cout << endl;
+	//~ cout << any_of(foo.begin(), foo.end(), [not_true](bool y) { return y == not_true; }) << endl;
+	
+	//~ // TEST EXIT
+	//~ exit(0);
+	//~ // END TEST AREA

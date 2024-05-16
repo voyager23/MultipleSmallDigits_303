@@ -26,7 +26,7 @@ class BaseNCounter
 		BaseNCounter(T base); // Warning: No Sanity Checks
 		BaseNCounter(T base, T v); // initial value base10 - converted internally 
 		BaseNCounter(T base, string v); // Inital value as a string
-		string str_accum();
+		string accum_str();
 		void inc_accum();
 		void inc_accum(T m);
 		void set_accum(T m);
@@ -66,7 +66,7 @@ template<typename T>
 void BaseNCounter<T>::set_accum(T v)
 // Basic sanity checks
 {
-	accumulator.clear();
+	accumulator = {0,0};
 	while(v > 0){
         T d = v % 10;
         if(base > d) {
@@ -93,7 +93,7 @@ BaseNCounter<T>::BaseNCounter (T b, string v)
 }
 
 template<typename T>
-string BaseNCounter<T>::str_accum(){
+string BaseNCounter<T>::accum_str(){
 // return the contents of the accumulator as a string
 	string a;
 	for(auto n : accumulator){
