@@ -26,7 +26,8 @@
 
 #include <iostream>
 #include <cstdint>
-#include <set>		// 
+#include <vector>
+#include <algorithm> 
 
 typedef uint64_t T;
 
@@ -36,10 +37,62 @@ typedef uint64_t T;
 
 int main(int argc, char **argv)
 {
-	// Must specify typename T, else it defaults to int 
-	// which causes overflow.
+	// TEST AREA
+	const bool not_true = false;
+	vector<bool> foo(5, false);
+	foo[0] = true;
+	foo[1] = true;
+	foo[3] = true;
+	for(auto b : foo) cout << "  " << b;
+	cout << endl;
+	cout << any_of(foo.begin(), foo.end(), [not_true](bool y) { return y == not_true; }) << endl;
+	
+	// TEST EXIT
+	exit(0);
+	// END TEST AREA
+	
+	
+	
+	const T foobar = 11'363'107;
+	// Consider a range of values 1 <= n <= MaxN
+	const T MaxN = 100;
+	
+	// Must specify typename T here 
+	// or else it defaults to int which overflows.
 	BaseNCounter<T> bnc(3);	//base3 counter
-	bnc.set_accum(2);	
+	bnc.set_accum(2);
+	vector<bool> found(MaxN+1,false);
+	found[1] = true;
+	T Sum = 1;
+	T idx = 1;
+	while(idx < MaxN){
+		idx += 1;
+		if((idx) > bnc.get_accum()){
+			while(bnc.get_accum() < idx) bnc.inc_accum();
+			idx = 1;
+			while(found[idx] == true) ++idx;
+		}
+		if(((found[idx]==false)and((bnc.get_accum() % idx) == 0))){
+			found[idx] = true;
+			Sum += bnc.get_accum() / idx;
+			// Check for simple multiples
+			T mult = 2;
+			T tmp = idx*mult;
+			while((mult < 8)and(tmp <= MaxN)and(tmp <= bnc.get_accum())){
+				if(((found[tmp] == false)and(bnc.get_accum() % tmp) == 0)){
+					found[tmp] = true;
+					Sum += bnc.get_accum() / tmp;
+				}//if...
+				++mult;
+				tmp = idx * mult;
+			}//while...			
+		} else {
+			++idx;
+		}
+	}//while idx...
+	//cout << "Expect: " << foobar << endl;
+	cout << "Sum:" << Sum << endl;
+	
 	return 0;
 }
 
