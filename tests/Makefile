@@ -2,8 +2,10 @@
 
 #TARGET = search_multiset
 #TARGET = classOutlier
-TARGET = solve_outliers
-TARGET = solve_list_outliers
+#TARGET = solve_outliers
+#TARGET = solve_list_outliers
+
+TARGET = b3nfactors
 
 CFLAGS = -g -std=c++17
 

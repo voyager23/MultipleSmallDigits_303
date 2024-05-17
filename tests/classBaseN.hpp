@@ -66,18 +66,21 @@ template<typename T>
 void BaseNCounter<T>::set_accum(T v)
 // Basic sanity checks
 {
-	accumulator = {0,0};
-	while(v > 0){
-        T d = v % 10;
-        if(base > d) {
-            accumulator.push_back(d);
-            v /= 10;
-        } else { // error clause
-            cout << d << " >= " << base;
-            exit(1);
-        }
+	if(v == 0){
+		accumulator = {0};
+	} else {
+		accumulator = {};
+		while(v > 0){
+			T d = v % 10;
+			if(base > d) {
+				accumulator.push_back(d);
+				v /= 10;
+			} else { // error clause
+				cout << d << " >= " << base;
+				exit(1);
+			}
+		}
 	}
-    ;;	
 }
 
 template<typename T>
