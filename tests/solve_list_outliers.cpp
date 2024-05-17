@@ -41,7 +41,7 @@ int main(int argc, char **argv)
 	const T expected = 11'363'107;
 	const bool not_true = false;
 	// Consider a range of values 1 <= n <= MaxN
-	const T MaxN = 200;
+	const T MaxN = 100;
 	BaseNCounter<T> bnc(3);	//base3 counter
 	bnc.set_accum(0);
 	vector<bool> found(MaxN+1,false);
@@ -54,6 +54,7 @@ int main(int argc, char **argv)
 	found[6] = true;
 	found[7] = true;
 	T idx, Sum = 16;
+	T todo = 93;	// MaxN - 7
 	while(any_of(found.begin(), found.end(), [not_true](bool y) { return y == not_true; })){
 		idx = 4;
 		// Adjust the index
@@ -65,8 +66,9 @@ int main(int argc, char **argv)
 		while(idx <= MaxN){
 			if ((found[idx] == false) and ( bnc.get_accum() % idx == 0 )){
 				found[idx] = true;
+				todo -= 1;
 				Sum += bnc.get_accum() / idx;
-				cout << idx << "/" << bnc.get_accum() << endl;
+				cout << idx << "/" << bnc.get_accum() << " | " << todo << endl;
 				// check for any simple multiples
 				T mult = 2;
 				T temp;
@@ -75,6 +77,7 @@ int main(int argc, char **argv)
 					if (temp > MaxN) break;
 					if ((found[temp] == false) and ( bnc.get_accum() % temp == 0 )){
 						found[temp] = true;
+						todo -= 1;
 						Sum += bnc.get_accum() / temp;
 					}
 				} while(++mult < 5);
