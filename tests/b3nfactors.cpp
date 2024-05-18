@@ -3,6 +3,7 @@
  * 
  * Copyright 2024 mike <mike@f39evo970-1.home>
  * 
+ * 				Solution 1111981904675169 - 16 digits
  */
 
 
@@ -71,16 +72,16 @@ using namespace std;
 
 int main(int argc, char **argv)
 {
-	const T Limit = 1000;
+	const T Limit = 10000;
 	Primes<T> primes(Limit*10 + 1);
 	set<T> dbase;
 	
 	for(T i = 11; i != Limit+1; ++i) dbase.insert(dbase.end(), i);
-	
+	T Sum = 1+4+3+2+2+3+14+1358+2;
 	BaseNCounter bcn(3);
 	bcn.set_accum(10);
 	T b3n = bcn.get_accum();
-	while(b3n <= 22'222'222'222){
+	while(dbase.empty() == false){
 		bcn.inc_accum();
 		b3n = bcn.get_accum();
 		vector<T> pf = primes.prime_factors(b3n);
@@ -93,13 +94,16 @@ int main(int argc, char **argv)
 			if(c < 11) break;
 			auto i = dbase.find(c);
 			if(i != dbase.end()){
-				cout << "Erasing " << c << endl;
+				cout << "Erasing " << c << " | "  << b3n << endl;
+				Sum += b3n / *i;
 				dbase.erase(i);
-				//if(dbase.empty()) break;
 			}
 		}
 	}
+	
 	for(auto n : dbase) cout << " " << n;
 	cout << endl;
+	
+	cout << Sum << endl;
 	return 0;
 }
