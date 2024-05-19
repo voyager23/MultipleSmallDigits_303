@@ -105,18 +105,35 @@ string BaseNCounter<T>::accum_str(){
 	return(a);
 }
 
+//~ template<typename T>
+//~ void BaseNCounter<T>::inc_accum(){
+	//~ i = accumulator.begin();
+	//~ do{
+		//~ *i += 1;
+		//~ carry = *i / base;
+		//~ (*i) %= base;
+		//~ if((carry)and(++i == accumulator.end())) {
+			//~ accumulator.push_back(0);
+			//~ i = --accumulator.end();
+		//~ }
+	//~ }while(carry);
+//~ }
+
 template<typename T>
 void BaseNCounter<T>::inc_accum(){
-	i = accumulator.begin();
-	do{
-		*i += 1;
-		carry = *i / base;
-		(*i) %= base;
-		if((carry)and(++i == accumulator.end())) {
-			accumulator.push_back(0);
-			i = --accumulator.end();
+	// Version 1.1 2024/05/19 18:00:24
+	carry = 1;
+	for(i = accumulator.begin(); i != accumulator.end(); ++i) {
+		*i += carry;
+		*i %= base;
+		if(*i == 0) {
+			carry = 1;
+		} else {
+			carry = 0;
+			break;
 		}
-	}while(carry);
+	}
+	if(carry == 1) accumulator.push_back(carry);
 }
 
 template<typename T>

@@ -81,6 +81,20 @@ int main(int argc, char **argv)
 	BaseNCounter bcn(3);
 	bcn.set_accum(10);
 	T b3n = bcn.get_accum();
+	
+	// DEBUG CODE FOR BaseNCounter
+	
+	bcn.set_accum(2122222222);
+	for(auto loop = 0; loop != 5; ++loop)
+	{
+		T foo = bcn.get_accum();
+		cout << foo << endl;
+		bcn.inc_accum();
+	}
+	
+	exit(1);
+	
+	// END DEBUG CODE
 	while(dbase.empty() == false){
 		bcn.inc_accum();
 		b3n = bcn.get_accum();
