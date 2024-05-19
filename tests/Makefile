@@ -7,7 +7,8 @@
 
 TARGET = b3nfactors
 
-CFLAGS = -g -std=c++17
+
+CFLAGS = -g -std=c++23
 
 $(TARGET): $(TARGET).cpp 
 	g++ $(CFLAGS) $(TARGET).cpp  -o ../bin/$(TARGET)

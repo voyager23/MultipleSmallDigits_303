@@ -28,7 +28,7 @@ int main(int argc,char ** argv)
 	bnc.set_accum(2);
 	
 	queue<T> q1, q2;
-	for(T n = 2; n != 10001; ++n){
+	for(T n = 2; n != 1001; ++n){
 		q1.push(n);
     }
 	T sentinel = 0;		
